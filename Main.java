@@ -3,6 +3,20 @@
  */
 
 public class Main {
+    private static long start;
+    private static long end;
+
+    public static void timer_start(){
+        start = System.currentTimeMillis();
+    }
+
+    public static void timer_stop(){
+        end = System.currentTimeMillis();
+    }
+
+    public static void print_time(String message){
+        System.out.println(message + " time elapsed : " + (end - start) / 1000.0 ) ;
+    }
 
     public static void main(String[] args) {
         int size = 10000;
@@ -12,8 +26,7 @@ public class Main {
         }
 
         Sort s = new Sort(data);
-        long start = System.currentTimeMillis(); // 시간 측정 시작
-
+        timer_start();
 
         // 선택정렬 수행
 //        s.selectionsort();
@@ -22,16 +35,29 @@ public class Main {
 //        s.insertionsort();
 
         // 퀵정렬 수행
-//        s.quicksort();
+
+        s.quicksort();
+        timer_stop();
+        print_time("not opt");
+
+        timer_start();
+        s.quicksortoptimized();
 
         // 병합 정렬 수행
-        s.mergesort();
+//        s.mergesort();
 
 
-        long end = System.currentTimeMillis(); // 시간 측정 종료
-        System.out.println("time elapsed : " + (end - start) / 1000.0 ) ;
+        timer_stop();
+        print_time("yes opt");
 
         //결과 출력
 //        s.print();
+
+
+        Employee e[] = {new Employee("Gildong", "Hong"), new Employee("Malja", "Kim"), new Employee("Mandoo", "Jung")};
+        Employee.sortEmployee(e);
+
+        for(int i = 0; i < e.length; i++)
+            e[i].print();
     }
 }

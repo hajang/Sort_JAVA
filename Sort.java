@@ -102,6 +102,30 @@ public class Sort {
         quicksort(end + 1, e); // 오른쪽 반 퀵정렬
     }
 
+    public void quicksortoptimized(){
+        quicksortoptimized(0, data.length - 1);
+    }
+
+    public void quicksortoptimized(int start, int end){
+        // pivot을 중간값으로 선택, 좌우 iterator 초기화
+        int pivot = data[(start + end) / 2];
+        int left = start;
+        int right = end;
+
+        while(left <= right){
+            while(data[left] < pivot) left++;
+            while(data[right] > pivot) right--;
+
+            if(left <= right)
+                swap(left++, right--);
+
+            if(start < right)
+                quicksortoptimized(start, right);
+            if(left < end)
+                quicksortoptimized(left, end);
+        }
+    }
+
     // 데이터 교환 함수
     private void swap(int a, int b){
         int temp = data[a];
